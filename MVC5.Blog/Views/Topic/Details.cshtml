@@ -1,0 +1,77 @@
+﻿@model Blog.Mvc.Models.Topic
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Topic</h4>
+	<hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Content)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Content)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreationDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreationDate)
+        </dd>
+        
+        <dt>
+            @Html.DisplayNameFor(model => model.UserId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserId)
+        </dd>
+
+    </dl>
+    
+    <h4>Posts</h4>
+    <hr />
+
+    @foreach (var item in Model.Posts)
+    {
+        <div>
+            @item.Content
+        </div>
+
+        <div>
+            <h4>@item.UserId</h4>
+        </div>
+    }
+    
+    @if (User.Identity.IsAuthenticated)
+    {
+        @Html.TextArea("NewPostId", new {rows = 10, columns = 20, @class = "form-control"})
+        <input type="submit" value="Add Post" class="btn btn-default" />
+    }
+
+    <hr />
+</div>
+<p>
+    @if (User.Identity.IsAuthenticated)
+    {
+        @Html.ActionLink("Edit", "Edit", new {id = Model.Id})
+    }
+    |
+                                                            
+    @Html.ActionLink("Back to List", "Index")
+</p>
